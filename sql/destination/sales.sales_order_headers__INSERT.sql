@@ -1,0 +1,3 @@
+INSERT INTO sales.sales_order_headers(
+	sales_order_id, revision_number, order_date, due_date, ship_date, status, online_order_flag, purchase_order_number, account_number, customer_id, sales_person_id, sales_territory_id, bill_to_address_id, ship_to_address_id, ship_method_id, credit_card_id, credit_card_approval_code, currency_rate_id, subtotal, tax_amount, freight, comment, rowguid, modified_date)
+ OVERRIDING SYSTEM VALUE VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
