@@ -1,0 +1,5 @@
+CREATE DATABASE $database
+    WITH
+    ENCODING = 'UTF8'
+    TEMPLATE = template0
+    CONNECTION LIMIT = -1;

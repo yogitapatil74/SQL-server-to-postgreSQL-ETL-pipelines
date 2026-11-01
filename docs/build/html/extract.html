@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>extract package &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">extract package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/extract.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="extract-package">
+<h1>extract package<a class="headerlink" href="#extract-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-extract.get_source_data">
+<span id="extract-get-source-data-module"></span><h2>extract.get_source_data module<a class="headerlink" href="#module-extract.get_source_data" title="Link to this heading"></a></h2>
+<section id="module-get-source-data">
+<h3>Module: get_source_data<a class="headerlink" href="#module-get-source-data" title="Link to this heading"></a></h3>
+<p>This module provides functionality to extract and validate source data from
+SQL query files defined in a JSON mapping configuration. It reads query
+definitions, executes them against a SQL Server database, and returns the
+aggregated results for downstream processing.</p>
+<section id="dependencies">
+<h4>Dependencies:<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>db.sql_server: Executes SQL queries using a default connection.</p></li>
+<li><p>utils.file_handler: Handles reading of JSON and SQL files.</p></li>
+<li><p>utils.logging_handler: Provides structured logging.</p></li>
+<li><p>utils.validation_handler: Validates data structures post-query execution.</p></li>
+<li><p>decouple.config: Loads environment-specific configuration values.</p></li>
+</ul>
+</section>
+<section id="environment-variables">
+<h4>Environment Variables:<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>SQL_PATH: Base path to the directory containing SQL source query files.</p></li>
+</ul>
+</section>
+<section id="usage">
+<h4>Usage:<a class="headerlink" href="#usage" title="Link to this heading"></a></h4>
+<p>This module is typically used in ETL pipelines or data ingestion workflows
+where source queries are modularized and defined externally in JSON format.</p>
+</section>
+<section id="example">
+<h4>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>success, data = get_source_data(“mapping_source.json”)
+if success:</p>
+<blockquote>
+<div><p>process(data)</p>
+</div></blockquote>
+</div></blockquote>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="extract.get_source_data.get_source_data">
+<span class="sig-prename descclassname"><span class="pre">extract.get_source_data.</span></span><span class="sig-name descname"><span class="pre">get_source_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/extract/get_source_data.html#get_source_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#extract.get_source_data.get_source_data" title="Link to this definition"></a></dt>
+<dd><p>Extracts and validates source data from SQL query files defined in a JSON
+mapping file.</p>
+<p>This function reads a JSON file containing metadata about source tables
+and their associated SQL query filenames. It loads each query, executes it
+using the default SQL Server connection, and aggregates the results into a
+list. Each query result is validated before inclusion.</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>file<span class="classifier">str, optional</span></dt><dd><p>The filename of the JSON mapping file (e.g., ‘mapping_source.json’).
+If not provided, the default path will be used by the file handler.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Tuple[bool, list]</dt><dd><p>A tuple containing:
+- success (bool): True if all queries executed and validated
+successfully.
+- data (list): A list of query result sets, one per source table.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h3>Raises:<a class="headerlink" href="#raises" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>FileNotFoundError:</dt><dd><p>If any referenced SQL query file is missing or unreadable.</p>
+</dd>
+<dt>ValueError:</dt><dd><p>If the JSON mapping file is malformed or contains invalid entries.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes:<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Query files must be located in the directory defined by the SQL_PATH</p></li>
+</ul>
+<p>environment variable.
+- Each query file must return a valid SQL SELECT statement.
+- Logging is performed at each step for traceability and debugging.</p>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-extract">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-extract" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

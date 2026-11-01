@@ -1,0 +1,260 @@
+2025-11-05 12:09:47 - INFO - root - ===============================================================
+2025-11-05 12:09:47 - INFO - root - ⚫ STARTING: ETL for Database aw_sales
+2025-11-05 12:09:47 - INFO - root - 🔷 DROP DATABASES
+2025-11-05 12:09:47 - INFO - root - ➡️ STARTING: Dropping database: aw_sales.
+2025-11-05 12:09:47 - INFO - root - 🟢 SUCCESS: db_database__DROP.sql executed.
+2025-11-05 12:09:47 - INFO - root - ☑️ COMPLETED: Database aw_sales dropped.
+2025-11-05 12:09:47 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:47 - INFO - root - ➡️ STARTING: Dropping database: aw_sales_test.
+2025-11-05 12:09:47 - INFO - root - 🟢 SUCCESS: db_database__DROP.sql executed.
+2025-11-05 12:09:47 - INFO - root - ☑️ COMPLETED: Database aw_sales_test dropped.
+2025-11-05 12:09:47 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:47 - INFO - root - 🔷 DROP ROLE
+2025-11-05 12:09:47 - INFO - root - ➡️ STARTING: Dropping role etl_user.
+2025-11-05 12:09:47 - INFO - root - 🟢 SUCCESS: db_role__DROP.sql executed.
+2025-11-05 12:09:47 - INFO - root - ☑️ COMPLETED: Role etl_user dropped.
+2025-11-05 12:09:47 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:47 - INFO - root - 🔷 BUILD QUERY/TABLE MAPPINGS
+2025-11-05 12:09:47 - INFO - root - ➡️ STARTING: Building Source Query/Table Mapping.
+2025-11-05 12:09:47 - INFO - root - 🟢 SUCCESS: mapping_source.json created.
+2025-11-05 12:09:47 - INFO - root - ☑️ COMPLETED: Source Query/Table Mapping completed.
+2025-11-05 12:09:47 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:47 - INFO - root - ➡️ STARTING: Building Destination Query/Table Mapping.
+2025-11-05 12:09:47 - INFO - root - 🟢 SUCCESS: mapping_destination.json created.
+2025-11-05 12:09:47 - INFO - root - ☑️ COMPLETED: Destination Query/Table Mapping completed.
+2025-11-05 12:09:47 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:47 - INFO - root - 🔷 BUILD DATABASES
+2025-11-05 12:09:47 - INFO - root - ➡️ STARTING: Creating Database aw_sales.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_database__CREATE.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Database aw_sales created.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Creating Role etl_user
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_role__CREATE.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Role etl_user created.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Granting Database Permissions
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_database__GRANT.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Database Permissions granted.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Creating Database Schemas.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_schemas__CREATE.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Database Schemas created.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Granting Table Permissions
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_role__GRANT.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Table Permissions granted.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Creating Database aw_sales_test.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_database__CREATE.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Database aw_sales_test created.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Granting Database Permissions
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_database__GRANT.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Database Permissions granted.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Creating Database Schemas.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_schemas__CREATE.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Database Schemas created.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Granting Table Permissions
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: db_role__GRANT.sql executed.
+2025-11-05 12:09:48 - INFO - root - ☑️ COMPLETED: Table Permissions granted.
+2025-11-05 12:09:48 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:48 - INFO - root - 🔷 CREATE DATABASE TABLES
+2025-11-05 12:09:48 - INFO - root - ➡️ STARTING: Creating aw_sales Tables.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: Destination Mapping JSON file read.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: people.address_types__CREATE.sql executed.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: people.country_regions__CREATE.sql executed.
+2025-11-05 12:09:48 - INFO - root - 🟢 SUCCESS: people.phone_number_types__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: production.product_categories__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: production.product_descriptions__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: production.product_models__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: production.unit_measures__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.credit_cards__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.currencies__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.sales_reasons__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.special_offers__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.ship_methods__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: people.locations__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: people.people__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: production.product_subcategories__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.country_region_currencies__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.currency_rates__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: sales.sales_territories__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: people.email_addresses__CREATE.sql executed.
+2025-11-05 12:09:49 - INFO - root - 🟢 SUCCESS: people.phone_numbers__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: people.state_provinces__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: production.products__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_person_credit_cards__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: people.addresses__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_people__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_tax_rates__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.shopping_cart_items__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.special_offer_products__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_people_quota_history__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_territories_history__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.stores__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.customers__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_order_headers__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_order_details__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: sales.sales_order_header_sales_reasons__CREATE.sql executed.
+2025-11-05 12:09:50 - INFO - root - ☑️ COMPLETED: aw_sales Tables created.
+2025-11-05 12:09:50 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:50 - INFO - root - ➡️ STARTING: Creating aw_sales_test Tables.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: Destination Mapping JSON file read.
+2025-11-05 12:09:50 - INFO - root - 🟢 SUCCESS: people.address_types__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: people.country_regions__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: people.phone_number_types__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: production.product_categories__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: production.product_descriptions__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: production.product_models__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: production.unit_measures__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.credit_cards__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.currencies__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.sales_reasons__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.special_offers__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.ship_methods__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: people.locations__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: people.people__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: production.product_subcategories__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.country_region_currencies__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.currency_rates__CREATE.sql executed.
+2025-11-05 12:09:51 - INFO - root - 🟢 SUCCESS: sales.sales_territories__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: people.email_addresses__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: people.phone_numbers__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: people.state_provinces__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: production.products__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.sales_person_credit_cards__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: people.addresses__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.sales_people__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.sales_tax_rates__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.shopping_cart_items__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.special_offer_products__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.sales_people_quota_history__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.sales_territories_history__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.stores__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.customers__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.sales_order_headers__CREATE.sql executed.
+2025-11-05 12:09:52 - INFO - root - 🟢 SUCCESS: sales.sales_order_details__CREATE.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: sales.sales_order_header_sales_reasons__CREATE.sql executed.
+2025-11-05 12:09:53 - INFO - root - ☑️ COMPLETED: aw_sales_test Tables created.
+2025-11-05 12:09:53 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:53 - INFO - root - 🔷 EXTRACT SOURCE DATA
+2025-11-05 12:09:53 - INFO - root - ➡️ STARTING: Extracting Source Data
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Mapping Source JSON file read.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Person.AddressType__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Person.CountryRegion__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Person.PhoneNumberType__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Production.ProductCategory__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Production.ProductDescription__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Production.ProductModel__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Production.UnitMeasure__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Sales.CreditCard__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Sales.Currency__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Sales.SalesReason__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Sales.SpecialOffer__SELECT.sql executed.
+2025-11-05 12:09:53 - INFO - root - 🟢 SUCCESS: Purchasing.ShipMethod__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Person.Person__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Production.ProductSubcategory__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Sales.CountryRegionCurrency__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Sales.CurrencyRate__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Sales.SalesTerritory__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Person.EmailAddress__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Person.PersonPhone__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Person.StateProvince__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Production.Product__SELECT.sql executed.
+2025-11-05 12:09:54 - INFO - root - 🟢 SUCCESS: Sales.SalesPersonCreditCard__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Person.Address__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.SalesPerson__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.SalesTaxRate__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.ShoppingCartItem__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.SpecialOfferProduct__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.SalesPersonQuotaHistory__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.SalesTerritoryHistory__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.Store__SELECT.sql executed.
+2025-11-05 12:09:55 - INFO - root - 🟢 SUCCESS: Sales.Customer__SELECT.sql executed.
+2025-11-05 12:09:56 - INFO - root - 🟢 SUCCESS: Sales.SalesOrderHeader__SELECT.sql executed.
+2025-11-05 12:09:57 - INFO - root - 🟢 SUCCESS: Sales.SalesOrderDetail__SELECT.sql executed.
+2025-11-05 12:09:57 - INFO - root - 🟢 SUCCESS: Sales.SalesOrderHeaderSalesReason__SELECT.sql executed.
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: Person.Location__SELECT.sql executed.
+2025-11-05 12:09:58 - INFO - root - ☑️ COMPLETED: Source Data extracted.
+2025-11-05 12:09:58 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:09:58 - INFO - root - 🔷 LOAD DESTINATION DATA
+2025-11-05 12:09:58 - INFO - root - ➡️ STARTING: Loading Destination Tables
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: people.address_types__INSERT.sql executed.
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: people.country_regions__INSERT.sql executed.
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: people.phone_number_types__INSERT.sql executed.
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: production.product_categories__INSERT.sql executed.
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: production.product_descriptions__INSERT.sql executed.
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: production.product_models__INSERT.sql executed.
+2025-11-05 12:09:58 - INFO - root - 🟢 SUCCESS: production.unit_measures__INSERT.sql executed.
+2025-11-05 12:09:59 - INFO - root - 🟢 SUCCESS: sales.credit_cards__INSERT.sql executed.
+2025-11-05 12:09:59 - INFO - root - 🟢 SUCCESS: sales.currencies__INSERT.sql executed.
+2025-11-05 12:09:59 - INFO - root - 🟢 SUCCESS: sales.sales_reasons__INSERT.sql executed.
+2025-11-05 12:09:59 - INFO - root - 🟢 SUCCESS: sales.special_offers__INSERT.sql executed.
+2025-11-05 12:09:59 - INFO - root - 🟢 SUCCESS: sales.ship_methods__INSERT.sql executed.
+2025-11-05 12:10:00 - INFO - root - 🟢 SUCCESS: people.people__INSERT.sql executed.
+2025-11-05 12:10:00 - INFO - root - 🟢 SUCCESS: production.product_subcategories__INSERT.sql executed.
+2025-11-05 12:10:00 - INFO - root - 🟢 SUCCESS: sales.country_region_currencies__INSERT.sql executed.
+2025-11-05 12:10:01 - INFO - root - 🟢 SUCCESS: sales.currency_rates__INSERT.sql executed.
+2025-11-05 12:10:01 - INFO - root - 🟢 SUCCESS: sales.sales_territories__INSERT.sql executed.
+2025-11-05 12:10:02 - INFO - root - 🟢 SUCCESS: people.email_addresses__INSERT.sql executed.
+2025-11-05 12:10:03 - INFO - root - 🟢 SUCCESS: people.phone_numbers__INSERT.sql executed.
+2025-11-05 12:10:03 - INFO - root - 🟢 SUCCESS: people.state_provinces__INSERT.sql executed.
+2025-11-05 12:10:03 - INFO - root - 🟢 SUCCESS: production.products__INSERT.sql executed.
+2025-11-05 12:10:04 - INFO - root - 🟢 SUCCESS: sales.sales_person_credit_cards__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: people.addresses__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: sales.sales_people__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: sales.sales_tax_rates__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: sales.shopping_cart_items__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: sales.special_offer_products__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: sales.sales_people_quota_history__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: sales.sales_territories_history__INSERT.sql executed.
+2025-11-05 12:10:05 - INFO - root - 🟢 SUCCESS: sales.stores__INSERT.sql executed.
+2025-11-05 12:10:07 - INFO - root - 🟢 SUCCESS: sales.customers__INSERT.sql executed.
+2025-11-05 12:10:12 - INFO - root - 🟢 SUCCESS: sales.sales_order_headers__INSERT.sql executed.
+2025-11-05 12:10:19 - INFO - root - 🟢 SUCCESS: sales.sales_order_details__INSERT.sql executed.
+2025-11-05 12:10:20 - INFO - root - 🟢 SUCCESS: sales.sales_order_header_sales_reasons__INSERT.sql executed.
+2025-11-05 12:10:27 - INFO - root - 🟢 SUCCESS: people.locations__INSERT.sql executed.
+2025-11-05 12:10:27 - INFO - root - ☑️ COMPLETED: Destination Tables loaded.
+2025-11-05 12:10:27 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:10:27 - INFO - root - ➡️ STARTING: Loading Destination Tables
+2025-11-05 12:10:27 - INFO - root - 🟢 SUCCESS: people.address_types__INSERT.sql executed.
+2025-11-05 12:10:27 - INFO - root - 🟢 SUCCESS: people.country_regions__INSERT.sql executed.
+2025-11-05 12:10:27 - INFO - root - 🟢 SUCCESS: people.phone_number_types__INSERT.sql executed.
+2025-11-05 12:10:27 - INFO - root - 🟢 SUCCESS: production.product_categories__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: production.product_descriptions__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: production.product_models__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: production.unit_measures__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: sales.credit_cards__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: sales.currencies__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: sales.sales_reasons__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: sales.special_offers__INSERT.sql executed.
+2025-11-05 12:10:28 - INFO - root - 🟢 SUCCESS: sales.ship_methods__INSERT.sql executed.
+2025-11-05 12:10:30 - INFO - root - 🟢 SUCCESS: people.people__INSERT.sql executed.
+2025-11-05 12:10:30 - INFO - root - 🟢 SUCCESS: production.product_subcategories__INSERT.sql executed.
+2025-11-05 12:10:30 - INFO - root - 🟢 SUCCESS: sales.country_region_currencies__INSERT.sql executed.
+2025-11-05 12:10:30 - INFO - root - 🟢 SUCCESS: sales.currency_rates__INSERT.sql executed.
+2025-11-05 12:10:31 - INFO - root - 🟢 SUCCESS: sales.sales_territories__INSERT.sql executed.
+2025-11-05 12:10:31 - INFO - root - 🟢 SUCCESS: people.email_addresses__INSERT.sql executed.
+2025-11-05 12:10:32 - INFO - root - 🟢 SUCCESS: people.phone_numbers__INSERT.sql executed.
+2025-11-05 12:10:32 - INFO - root - 🟢 SUCCESS: people.state_provinces__INSERT.sql executed.
+2025-11-05 12:10:32 - INFO - root - 🟢 SUCCESS: production.products__INSERT.sql executed.
+2025-11-05 12:10:33 - INFO - root - 🟢 SUCCESS: sales.sales_person_credit_cards__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: people.addresses__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: sales.sales_people__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: sales.sales_tax_rates__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: sales.shopping_cart_items__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: sales.special_offer_products__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: sales.sales_people_quota_history__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: sales.sales_territories_history__INSERT.sql executed.
+2025-11-05 12:10:34 - INFO - root - 🟢 SUCCESS: sales.stores__INSERT.sql executed.
+2025-11-05 12:10:35 - INFO - root - 🟢 SUCCESS: sales.customers__INSERT.sql executed.
+2025-11-05 12:10:40 - INFO - root - 🟢 SUCCESS: sales.sales_order_headers__INSERT.sql executed.
+2025-11-05 12:10:48 - INFO - root - 🟢 SUCCESS: sales.sales_order_details__INSERT.sql executed.
+2025-11-05 12:10:49 - INFO - root - 🟢 SUCCESS: sales.sales_order_header_sales_reasons__INSERT.sql executed.
+2025-11-05 12:10:55 - INFO - root - 🟢 SUCCESS: people.locations__INSERT.sql executed.
+2025-11-05 12:10:55 - INFO - root - ☑️ COMPLETED: Destination Tables loaded.
+2025-11-05 12:10:55 - INFO - root - ---------------------------------------------------------------
+2025-11-05 12:10:55 - INFO - root - 🏁 COMPLETED: ETL for Database: aw_sales.
+2025-11-05 12:10:55 - INFO - root - ===============================================================

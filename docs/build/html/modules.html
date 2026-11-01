@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">db package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">build package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extract.html">extract package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">load package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">src</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src">
+<h1>src<a class="headerlink" href="#src" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main-py-etl-orchestration-module">main.py — ETL Orchestration Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.build_mapping_data"><code class="docutils literal notranslate"><span class="pre">build_mapping_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.create_database"><code class="docutils literal notranslate"><span class="pre">create_database()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.create_database_schemas"><code class="docutils literal notranslate"><span class="pre">create_database_schemas()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.create_database_tables"><code class="docutils literal notranslate"><span class="pre">create_database_tables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.create_role"><code class="docutils literal notranslate"><span class="pre">create_role()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.drop_database"><code class="docutils literal notranslate"><span class="pre">drop_database()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.drop_role"><code class="docutils literal notranslate"><span class="pre">drop_role()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.extract_source_data"><code class="docutils literal notranslate"><span class="pre">extract_source_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.grant_database_permissions"><code class="docutils literal notranslate"><span class="pre">grant_database_permissions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.grant_table_permissions"><code class="docutils literal notranslate"><span class="pre">grant_table_permissions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.load_destination_tables"><code class="docutils literal notranslate"><span class="pre">load_destination_tables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="db.html">db package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="db.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html#module-db.postgresql">db.postgresql module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="db.html#db.postgresql.set_pg_connection"><code class="docutils literal notranslate"><span class="pre">set_pg_connection()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="db.html#module-db.postgresql_queries">db.postgresql_queries module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="db.html#db.postgresql_queries.pg_query"><code class="docutils literal notranslate"><span class="pre">pg_query()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="db.html#db.postgresql_queries.pg_query_from_file"><code class="docutils literal notranslate"><span class="pre">pg_query_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="db.html#module-db.sql_server">db.sql_server module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="db.html#module-sql-server">Module: sql_server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="db.html#purpose">Purpose:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db.html#key-features">Key Features:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db.html#environment-variables-required">Environment Variables Required:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db.html#dependencies">Dependencies:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db.html#example-usage">Example Usage:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="db.html#db.sql_server.execute_sql_query"><code class="docutils literal notranslate"><span class="pre">execute_sql_query()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="db.html#module-db">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">build package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build.html#module-build.build_destination_database">build.build_destination_database module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="build.html#purpose">Purpose:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#key-features">Key Features:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#environment-variables-required">Environment Variables Required:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#dependencies">Dependencies:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#example-usage">Example Usage:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.create_pg_database"><code class="docutils literal notranslate"><span class="pre">create_pg_database()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.create_pg_database_schemas"><code class="docutils literal notranslate"><span class="pre">create_pg_database_schemas()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.create_pg_role"><code class="docutils literal notranslate"><span class="pre">create_pg_role()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.create_pg_tables"><code class="docutils literal notranslate"><span class="pre">create_pg_tables()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.drop_pg_database"><code class="docutils literal notranslate"><span class="pre">drop_pg_database()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.drop_pg_role"><code class="docutils literal notranslate"><span class="pre">drop_pg_role()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.grant_pg_database_permissions"><code class="docutils literal notranslate"><span class="pre">grant_pg_database_permissions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#build.build_destination_database.grant_pg_table_permissions"><code class="docutils literal notranslate"><span class="pre">grant_pg_table_permissions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="build.html#module-build">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extract.html">extract package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extract.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extract.html#module-extract.get_source_data">extract.get_source_data module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extract.html#module-get-source-data">Module: get_source_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extract.html#dependencies">Dependencies:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract.html#environment-variables">Environment Variables:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract.html#usage">Usage:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extract.html#example">Example:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extract.html#extract.get_source_data.get_source_data"><code class="docutils literal notranslate"><span class="pre">get_source_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extract.html#module-extract">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">load package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="load.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="load.html#module-load.insert_source_data">load.insert_source_data module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="load.html#module-insert-source-data">Module: insert_source_data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="load.html#dependencies">Dependencies:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="load.html#environment-variables">Environment Variables:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="load.html#usage">Usage:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="load.html#example">Example:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="load.html#load.insert_source_data.insert_pg_tables"><code class="docutils literal notranslate"><span class="pre">insert_pg_tables()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="load.html#module-load">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.file_handler">utils.file_handler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#module-json-query-handler">Module: json_query_handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.file_handler.get_query_list_from_file"><code class="docutils literal notranslate"><span class="pre">get_query_list_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.file_handler.load_json_file"><code class="docutils literal notranslate"><span class="pre">load_json_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.file_handler.read_json_file"><code class="docutils literal notranslate"><span class="pre">read_json_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.file_handler.read_query_from_file"><code class="docutils literal notranslate"><span class="pre">read_query_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.logging_handler">utils.logging_handler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#purpose">Purpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#logging-behavior">Logging Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#handlers">Handlers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.query_mapping_handler">utils.query_mapping_handler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#module-query-mapping-handler">Module: query_mapping_handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id1">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id2">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.query_mapping_handler.get_destination_mapping_data"><code class="docutils literal notranslate"><span class="pre">get_destination_mapping_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.query_mapping_handler.get_source_mapping_data"><code class="docutils literal notranslate"><span class="pre">get_source_mapping_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.query_mapping_handler.write_mapping_data"><code class="docutils literal notranslate"><span class="pre">write_mapping_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.validation_handler">utils.validation_handler module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#module-validation-handler">Module: validation_handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id3">Functions:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id4">Dependencies:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#utils.validation_handler.validate_list"><code class="docutils literal notranslate"><span class="pre">validate_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils package &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="utils-package">
+<h1>utils package<a class="headerlink" href="#utils-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-utils.file_handler">
+<span id="utils-file-handler-module"></span><h2>utils.file_handler module<a class="headerlink" href="#module-utils.file_handler" title="Link to this heading"></a></h2>
+<section id="module-json-query-handler">
+<h3>Module: json_query_handler<a class="headerlink" href="#module-json-query-handler" title="Link to this heading"></a></h3>
+<p>This module provides utilities for reading JSON files and extracting query data
+used in ETL pipelines or data orchestration workflows. It includes structured
+logging, validation, and error handling to support robust backend operations.</p>
+<section id="dependencies">
+<h4>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>json : For loading JSON content from disk.</p></li>
+<li><p>typing : For type annotations.</p></li>
+<li><p>utils.logging_handler.logger : Custom logger for structured logging.</p></li>
+<li><p>utils.validation_handler : Validation utilities for list integrity checks.</p></li>
+</ul>
+</section>
+<section id="functions">
+<h4>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>read_json_file : Loads and validates a JSON file containing query</p></li>
+</ul>
+<p>definitions.
+- load_json_file : Reads raw JSON content from disk and returns a success flag.
+- read_query_from_file : Reads a raw SQL query from a text file.
+- get_query_list_from_file : Extracts a list of query tuples from JSON content.</p>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.file_handler.get_query_list_from_file">
+<span class="sig-prename descclassname"><span class="pre">utils.file_handler.</span></span><span class="sig-name descname"><span class="pre">get_query_list_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/utils/file_handler.html#get_query_list_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_handler.get_query_list_from_file" title="Link to this definition"></a></dt>
+<dd><p>Extract a list of query tuples from JSON content.</p>
+<p>This function iterates over a list of query dictionaries and constructs a
+list of (table_id, query_string) tuples for downstream execution or
+mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The key name used to extract query strings from each dictionary.</p></li>
+<li><p><strong>queries</strong> (<em>str</em>) – A list of dictionaries containing query metadata.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Tuple[bool, list]</em> – A tuple containing:
+- success (bool): True if the query list was constructed successfully.
+- query_list (list): List of (table_id, query_string) tuples.</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs success for each query added and failure if the list is empty.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_query_list_from_file</span><span class="p">(</span><span class="s2">&quot;destination_query_create&quot;</span><span class="p">,</span> <span class="n">queries</span><span class="p">)</span>
+<span class="go">(True, [(1, &quot;CREATE TABLE ...&quot;), (2, &quot;CREATE TABLE ...&quot;)])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.file_handler.load_json_file">
+<span class="sig-prename descclassname"><span class="pre">utils.file_handler.</span></span><span class="sig-name descname"><span class="pre">load_json_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/utils/file_handler.html#load_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_handler.load_json_file" title="Link to this definition"></a></dt>
+<dd><p>Load raw JSON content from a file.</p>
+<p>This function opens a JSON file, parses its contents, and returns a
+success flag along with the loaded data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – Path to the JSON file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Tuple[bool, list]</em> – A tuple containing:
+- success (bool): True if the file was loaded successfully.
+- data (list): Parsed JSON content.</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs errors for file not found, JSON decode issues, or unexpected</em></p></li>
+<li><p><em>exceptions.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">load_json_file</span><span class="p">(</span><span class="s2">&quot;queries.json&quot;</span><span class="p">)</span>
+<span class="go">(True, [...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.file_handler.read_json_file">
+<span class="sig-prename descclassname"><span class="pre">utils.file_handler.</span></span><span class="sig-name descname"><span class="pre">read_json_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/utils/file_handler.html#read_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_handler.read_json_file" title="Link to this definition"></a></dt>
+<dd><p>Load and validate a JSON file containing query definitions.</p>
+<p>This function reads a JSON file, validates its contents using a list
+integrity check, and returns a success flag along with the parsed data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – A descriptive label used in logging to identify the source of the JSON
+file.</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – Path to the JSON file to be read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Tuple[bool, list]</em> – A tuple containing:
+- success (bool): True if the file was read and validated successfully.
+- queries (list): Parsed list of query definitions.</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs success or failure messages based on file read and validation outcome.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">read_json_file</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;source_queries.json&quot;</span><span class="p">)</span>
+<span class="go">(True, [...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.file_handler.read_query_from_file">
+<span class="sig-prename descclassname"><span class="pre">utils.file_handler.</span></span><span class="sig-name descname"><span class="pre">read_query_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/utils/file_handler.html#read_query_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.file_handler.read_query_from_file" title="Link to this definition"></a></dt>
+<dd><p>Read a raw SQL query from a text file.</p>
+<p>This function opens a file containing a SQL query, strips newline and tab
+characters, and returns the cleaned query string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to the query file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Tuple[bool, str]</em> – A tuple containing:
+- success (bool): True if the query was read successfully.
+- query (str): Cleaned SQL query string.</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs errors for file not found or unexpected exceptions.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">read_query_from_file</span><span class="p">(</span><span class="s2">&quot;create_table.sql&quot;</span><span class="p">)</span>
+<span class="go">(True, &quot;CREATE TABLE ...&quot;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-utils.logging_handler">
+<span id="utils-logging-handler-module"></span><h2>utils.logging_handler module<a class="headerlink" href="#module-utils.logging_handler" title="Link to this heading"></a></h2>
+<p>Module: logging_handler
+======================+</p>
+<p>This module initializes and configures the logging system for the application.
+It supports both file-based and console logging, with dynamic log level
+selection based on environment variables. It also ensures that error-level
+logs are routed to a dedicated error log file for audit and debugging purposes.</p>
+<section id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Dynamically configure logging level and output file based on environment</p></li>
+</ul>
+<p>settings.
+- Format logs consistently across file and console outputs.
+- Route error-level logs to a separate file for traceability.</p>
+</section>
+<section id="environment-variables">
+<h3>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>LOGS_PATH<span class="classifier">str</span></dt><dd><p>Directory path where log files will be written.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>LOG_LEVEL<span class="classifier">str</span></dt><dd><p>Logging level to apply (e.g., INFO, DEBUG, ERROR).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="logging-behavior">
+<h3>Logging Behavior<a class="headerlink" href="#logging-behavior" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>INFO → logs to <cite>app.log</cite></p></li>
+<li><p>DEBUG → logs to <cite>debug.log</cite></p></li>
+<li><p>ERROR → logs to <cite>error.log</cite></p></li>
+<li><p>All logs are timestamped and formatted for readability.</p></li>
+<li><p>Console output uses simplified formatting.</p></li>
+<li><p>Error logs are duplicated to <cite>error.log</cite> regardless of global level.</p></li>
+</ul>
+</section>
+<section id="handlers">
+<h3>Handlers<a class="headerlink" href="#handlers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>FileHandler : Writes logs to dynamically selected log file.</p></li>
+<li><p>StreamHandler : Outputs logs to stderr for console visibility.</p></li>
+<li><p>ErrorHandler : Captures and writes ERROR-level logs to <cite>error.log</cite>.</p></li>
+</ul>
+<p class="rubric">Example</p>
+<p>To enable DEBUG logging and route logs to a specific directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LOG_LEVEL</span><span class="o">=</span>DEBUG
+<span class="nb">export</span><span class="w"> </span><span class="nv">LOGS_PATH</span><span class="o">=</span>/var/logs/my_app
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Uses <cite>decouple.config</cite> for environment variable management.</p></li>
+<li><p>Compatible with modular applications requiring centralized logging.</p></li>
+<li><p>Designed for extensibility and integration with external monitoring tools.</p></li>
+</ul>
+</section>
+</section>
+<section id="module-utils.query_mapping_handler">
+<span id="utils-query-mapping-handler-module"></span><h2>utils.query_mapping_handler module<a class="headerlink" href="#module-utils.query_mapping_handler" title="Link to this heading"></a></h2>
+<section id="module-query-mapping-handler">
+<h3>Module: query_mapping_handler<a class="headerlink" href="#module-query-mapping-handler" title="Link to this heading"></a></h3>
+<p>This module provides utilities for reading, filtering, and writing mapping data
+used in ETL workflows or data migration pipelines. It supports structured
+ingestion of source and destination mappings from CSV files and outputs
+validated JSON records for downstream consumption.</p>
+<section id="id1">
+<h4>Dependencies<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>pandas : For DataFrame operations and CSV/JSON I/O.</p></li>
+<li><p>os : For file existence checks.</p></li>
+<li><p>utils.logging_handler.logger : Custom logger for structured error and</p></li>
+</ul>
+<p>success reporting.</p>
+</section>
+<section id="id2">
+<h4>Functions<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>get_source_mapping_data : Extracts and filters source mapping records from a</p></li>
+</ul>
+<p>CSV file.
+- get_destination_mapping_data : Extracts and filters destination mapping
+records from a CSV file.
+- write_mapping_data : Serializes a DataFrame to JSON and verifies output
+creation.</p>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.query_mapping_handler.get_destination_mapping_data">
+<span class="sig-prename descclassname"><span class="pre">utils.query_mapping_handler.</span></span><span class="sig-name descname"><span class="pre">get_destination_mapping_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/utils/query_mapping_handler.html#get_destination_mapping_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.query_mapping_handler.get_destination_mapping_data" title="Link to this definition"></a></dt>
+<dd><p>Load and filter destination mapping data from a CSV file.</p>
+<p>This function reads a CSV file containing destination mapping definitions,
+filters for application-specific tables, and returns a sorted DataFrame
+excluding the <cite>is_app_table</cite> column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Path to the CSV file containing destination mapping data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.DataFrame</em> – Filtered and sorted DataFrame with columns:
+- destination_query_create
+- destination_query_insert
+- table_id (nullable integer)
+- execution_order</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs errors with traceback if the file is not found or if any exception</em></p></li>
+<li><p><em>occurs.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_destination_mapping_data</span><span class="p">(</span><span class="s2">&quot;destination_mappings.csv&quot;</span><span class="p">)</span>
+<span class="go">pd.DataFrame([...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.query_mapping_handler.get_source_mapping_data">
+<span class="sig-prename descclassname"><span class="pre">utils.query_mapping_handler.</span></span><span class="sig-name descname"><span class="pre">get_source_mapping_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/utils/query_mapping_handler.html#get_source_mapping_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.query_mapping_handler.get_source_mapping_data" title="Link to this definition"></a></dt>
+<dd><p>Load and filter source mapping data from a CSV file.</p>
+<p>This function reads a CSV file containing source mapping definitions,
+filters for application-specific tables, and returns a sorted DataFrame
+excluding the <cite>is_app_table</cite> column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Path to the CSV file containing source mapping data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.DataFrame</em> – Filtered and sorted DataFrame with columns:
+- source_query_select
+- table_id (nullable integer)
+- execution_order</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs errors if the file is not found or if any exception occurs during</em></p></li>
+<li><p><em>processing.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_source_mapping_data</span><span class="p">(</span><span class="s2">&quot;source_mappings.csv&quot;</span><span class="p">)</span>
+<span class="go">pd.DataFrame([...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.query_mapping_handler.write_mapping_data">
+<span class="sig-prename descclassname"><span class="pre">utils.query_mapping_handler.</span></span><span class="sig-name descname"><span class="pre">write_mapping_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/utils/query_mapping_handler.html#write_mapping_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.query_mapping_handler.write_mapping_data" title="Link to this definition"></a></dt>
+<dd><p>Write mapping data to a JSON file and confirm output creation.</p>
+<p>This function serializes the provided DataFrame to a JSON file using
+record orientation. It verifies that the file was successfully created
+and logs a success message with the filename.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – The mapping data to be written to disk.</p></li>
+<li><p><strong>output_filename</strong> (<em>str</em>) – The target filename for the JSON output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>bool</em> – True if the file was successfully created, False otherwise.</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs success with filename if output is created.</em></p></li>
+<li><p><em>Logs errors with traceback if any exception occurs.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">write_mapping_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;output.json&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-utils.validation_handler">
+<span id="utils-validation-handler-module"></span><h2>utils.validation_handler module<a class="headerlink" href="#module-utils.validation_handler" title="Link to this heading"></a></h2>
+<section id="module-validation-handler">
+<h3>Module: validation_handler<a class="headerlink" href="#module-validation-handler" title="Link to this heading"></a></h3>
+<p>This module provides utility functions for validating list-type inputs in a
+safe and logged manner.</p>
+<p>It is designed to support backend workflows where input integrity is critical
+and logging is required for debugging or audit trails.</p>
+<section id="id3">
+<h4>Functions:<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>validate_list: Validates whether a given list is non-empty and logs errors</p></li>
+</ul>
+<p>if validation fails.</p>
+</section>
+<section id="id4">
+<h4>Dependencies:<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>utils.logging_handler.logger: Custom logger used for info, debug, and error</p></li>
+</ul>
+<p>reporting.</p>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.validation_handler.validate_list">
+<span class="sig-prename descclassname"><span class="pre">utils.validation_handler.</span></span><span class="sig-name descname"><span class="pre">validate_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/utils/validation_handler.html#validate_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.validation_handler.validate_list" title="Link to this definition"></a></dt>
+<dd><p>Validate that a given list is non-empty.</p>
+<p>This function checks whether the provided list object contains any
+elements.</p>
+<p>If the list is empty or an exception occurs during evaluation, it logs an
+error with the provided name identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – A descriptive name for the list, used in error logging to identify the
+source.</p></li>
+<li><p><strong>list_object</strong> (<em>list</em>) – The list to validate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>bool</em> – True if the list is non-empty, False otherwise.</p></li>
+<li><p><em>Logging</em></p></li>
+<li><p><em>——-</em></p></li>
+<li><p><em>Logs an error with context if the list is empty or an exception is raised.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">validate_list</span><span class="p">(</span><span class="s2">&quot;user_ids&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">validate_list</span><span class="p">(</span><span class="s2">&quot;user_ids&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utils" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

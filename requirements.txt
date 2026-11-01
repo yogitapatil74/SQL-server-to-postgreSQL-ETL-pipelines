@@ -1,0 +1,5 @@
+# Runtime dependencies (mirror of [project.dependencies] in pyproject.toml)
+psycopg2-binary>=2.9.10
+pyodbc>=5.2.0
+python-dotenv>=1.1.1
+pandas>=2.2

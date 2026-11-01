@@ -1,0 +1,44 @@
+[project]
+name = "python-etl-sql-postgres"
+version = "0.2.0"
+description = "Python Demo ETL Pipeline: SQL Server to PostgreSQL"
+authors = [
+    {name = "kimberly-emerson", email = "kimberly.emerson@outlook.com"},
+]
+dependencies = [
+    "psycopg2-binary>=2.9.10",
+    "pyodbc>=5.2.0",
+    "python-dotenv>=1.1.1",
+    "pandas>=2.2",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "black>=25.9.0",
+]
+docs = [
+    "sphinx>=8.2.3",
+    "sphinx-autodoc-typehints>=3.5.2",
+    "sphinx-rtd-theme>=3.0.2",
+]
+
+[tool.pdm]
+distribution = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

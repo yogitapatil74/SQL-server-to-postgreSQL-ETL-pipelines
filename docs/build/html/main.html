@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>main module &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="ETL Orchestrator for PostgreSQL documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">main module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main-py-etl-orchestration-module">main.py — ETL Orchestration Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.build_mapping_data"><code class="docutils literal notranslate"><span class="pre">build_mapping_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.create_database"><code class="docutils literal notranslate"><span class="pre">create_database()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.create_database_schemas"><code class="docutils literal notranslate"><span class="pre">create_database_schemas()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.create_database_tables"><code class="docutils literal notranslate"><span class="pre">create_database_tables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.create_role"><code class="docutils literal notranslate"><span class="pre">create_role()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.drop_database"><code class="docutils literal notranslate"><span class="pre">drop_database()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.drop_role"><code class="docutils literal notranslate"><span class="pre">drop_role()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.extract_source_data"><code class="docutils literal notranslate"><span class="pre">extract_source_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.grant_database_permissions"><code class="docutils literal notranslate"><span class="pre">grant_database_permissions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.grant_table_permissions"><code class="docutils literal notranslate"><span class="pre">grant_table_permissions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.load_destination_tables"><code class="docutils literal notranslate"><span class="pre">load_destination_tables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">main module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/main.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-main">
+<span id="main-module"></span><h1>main module<a class="headerlink" href="#module-main" title="Link to this heading"></a></h1>
+<section id="main-py-etl-orchestration-module">
+<h2>main.py — ETL Orchestration Module<a class="headerlink" href="#main-py-etl-orchestration-module" title="Link to this heading"></a></h2>
+<p>Coordinates a full ETL (Extract, Transform, Load) workflow for PostgreSQL
+databases.</p>
+<p>This module automates teardown, schema creation, query mapping generation,
+data extraction, and data loading into production and test environments. It is
+designed to support reproducible ETL pipelines with modular components and
+environment-driven configuration.</p>
+<dl class="simple">
+<dt>Functions:</dt><dd><ul class="simple">
+<li><p>Drops and rebuilds PostgreSQL databases and roles.</p></li>
+<li><p>Generates source and destination query mappings from a CSV file.</p></li>
+<li><p>Extracts source data using parameterized SQL SELECT queries.</p></li>
+<li><p>Loads extracted data into destination tables using INSERT queries.</p></li>
+<li><p>Optionally seeds a test database with the same data.</p></li>
+</ul>
+</dd>
+<dt>Dependencies:</dt><dd><ul class="simple">
+<li><p>build.build_destination_database: DDL and permission utilities.</p></li>
+<li><p>extract.get_source_data: Source data extraction logic.</p></li>
+<li><p>load.insert_source_data: Destination data insertion logic.</p></li>
+<li><p>utils.query_mapping_handler: Mapping generation from CSV.</p></li>
+<li><p>utils.logging_handler: Structured logging.</p></li>
+<li><p>decouple.config: Environment variable management.</p></li>
+</ul>
+</dd>
+<dt>Environment Variables:</dt><dd><ul class="simple">
+<li><p>SQL_PATH: Root directory for query files and mapping CSV.</p></li>
+<li><p>DB_ROLE: Role name used for PostgreSQL access control.</p></li>
+</ul>
+</dd>
+<dt>Execution Steps:</dt><dd><ol class="arabic simple">
+<li><p>Drop existing databases and roles.</p></li>
+<li><p>Generate source and destination query mappings.</p></li>
+<li><p>Create databases, roles, schemas, and tables.</p></li>
+<li><p>Extract source data.</p></li>
+<li><p>Load data into destination and optionally test database.</p></li>
+</ol>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>To orchestrate ETL for the <cite>sales_db</cite> database and seed a test database:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">main.py</span> <span class="pre">--database</span> <span class="pre">sales_db</span> <span class="pre">--seed-test-database</span> <span class="pre">True</span>
+<span class="pre">`</span></code></p>
+<dl class="simple">
+<dt>This will:</dt><dd><ul class="simple">
+<li><p>Drop and rebuild <cite>sales_db</cite> and <cite>sales_db_test</cite>.</p></li>
+<li><p>Generate query mappings.</p></li>
+<li><p>Extract source data.</p></li>
+<li><p>Load destination tables.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="main.build_mapping_data">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">build_mapping_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#build_mapping_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.build_mapping_data" title="Link to this definition"></a></dt>
+<dd><p>Generates query or table mappings from a CSV file and writes the result to
+a JSON file.</p>
+<p>This function parses a CSV file containing table or query mappings and
+serializes the structured output to a JSON file. The mapping type
+determines whether the mappings are for source extraction or destination
+loading.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mapping_type</strong> (<em>str</em>) – Type of mapping to generate; must be either</p></li>
+<li><p><strong>'destination'.</strong> (<em>'source' or</em>)</p></li>
+<li><p><strong>mapping_file</strong> (<em>str</em>) – Path to the CSV file containing table/query</p></li>
+<li><p><strong>mappings.</strong></p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – Path to the output JSON file where mappings will be</p></li>
+<li><p><strong>written.</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If mapping generation fails due to invalid input or write</p></li>
+<li><p><strong>errors.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.create_database">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">create_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#create_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.create_database" title="Link to this definition"></a></dt>
+<dd><p>Creates a PostgreSQL database with the specified name.</p>
+<p>This function executes SQL statements to initialize a new PostgreSQL
+database using the provided name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>database</strong> (<em>str</em>) – Name of the database to create.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If database creation fails due to execution errors or</p></li>
+<li><p><strong>invalid configuration.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.create_database_schemas">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">create_database_schemas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/main.html#create_database_schemas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.create_database_schemas" title="Link to this definition"></a></dt>
+<dd><p>Creates schemas for the specified PostgreSQL database.</p>
+<p>This function executes SQL statements to define and initialize schemas
+required for the target database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>database</strong> (<em>str</em>) – Name of the target PostgreSQL database.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if schemas are created successfully.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If schema creation fails due to execution errors or</p></li>
+<li><p><strong>invalid configuration.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.create_database_tables">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">create_database_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#create_database_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.create_database_tables" title="Link to this definition"></a></dt>
+<dd><p>Creates PostgreSQL tables using destination query definitions.</p>
+<p>This function reads a JSON file containing SQL table creation queries and
+executes them against the specified PostgreSQL database to build the
+required schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>database</strong> (<em>str</em>) – Name of the target PostgreSQL database.</p></li>
+<li><p><strong>destination_file</strong> (<em>str</em>) – Path to the JSON file containing table</p></li>
+<li><p><strong>queries.</strong> (<em>creation</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If table creation fails due to invalid queries or</p></li>
+<li><p><strong>connection issues.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.create_role">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">create_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#create_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.create_role" title="Link to this definition"></a></dt>
+<dd><p>Creates a PostgreSQL role for the specified database.</p>
+<p>This function executes SQL statements to define a role with appropriate
+privileges for accessing and managing the target database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>database</strong> (<em>str</em>) – Name of the target PostgreSQL database.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If role creation fails due to execution errors or invalid</p></li>
+<li><p><strong>configuration.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.drop_database">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">drop_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#drop_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.drop_database" title="Link to this definition"></a></dt>
+<dd><p>Drops the specified PostgreSQL database.</p>
+<p>This function executes SQL commands to remove the given database from the
+PostgreSQL server, typically as part of a teardown or reinitialization
+process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>database</strong> (<em>str</em>) – Name of the database to drop.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If the database drop operation fails due to execution</p></li>
+<li><p><strong>errors</strong><strong> or </strong><strong>invalid configuration.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.drop_role">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">drop_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#drop_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.drop_role" title="Link to this definition"></a></dt>
+<dd><p>Drops the PostgreSQL role associated with the specified database.</p>
+<p>This function executes SQL statements to remove the role tied to the given
+database, typically as part of a teardown or reinitialization process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>database</strong> (<em>str</em>) – Name of the target PostgreSQL database.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If role drop fails due to execution errors or invalid</p></li>
+<li><p><strong>configuration.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.extract_source_data">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">extract_source_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/main.html#extract_source_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.extract_source_data" title="Link to this definition"></a></dt>
+<dd><p>Extracts source data using SQL SELECT queries defined in a JSON mapping
+file.</p>
+<p>This function reads a JSON file containing query mappings, executes the
+mapped SQL SELECT statements, and returns the resulting data payloads.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_file</strong> (<em>str</em>) – Path to the JSON file containing source query</p></li>
+<li><p><strong>mappings.</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of extracted data payloads.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>SystemExit</strong> – If no data is returned from the source queries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.grant_database_permissions">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">grant_database_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/main.html#grant_database_permissions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.grant_database_permissions" title="Link to this definition"></a></dt>
+<dd><p>Grants database-level permissions for the specified PostgreSQL database.</p>
+<p>This function executes GRANT statements to assign access privileges at the
+database level, enabling role-based control over connections and
+operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>database</strong> (<em>str</em>) – Name of the target PostgreSQL database.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if permissions are granted successfully.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If permission grant fails due to configuration or</p></li>
+<li><p><strong>execution errors.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.grant_table_permissions">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">grant_table_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/main.html#grant_table_permissions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.grant_table_permissions" title="Link to this definition"></a></dt>
+<dd><p>Grants table-level permissions for the specified PostgreSQL database.</p>
+<p>This function applies the necessary GRANT statements to enable access
+control for roles and users defined in the database schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>database</strong> (<em>str</em>) – Name of the target PostgreSQL database.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if permissions are granted successfully.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>SystemExit</strong> – If permission grant fails due to invalid configuration or</p></li>
+<li><p><strong>execution error.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.load_destination_tables">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">load_destination_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#load_destination_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.load_destination_tables" title="Link to this definition"></a></dt>
+<dd><p>Loads source data into PostgreSQL destination tables using predefined
+query mappings.</p>
+<p>This function delegates the insertion logic to <cite>dest.insert_pg_tables</cite>,
+which executes the mapped SQL insert statements defined in the destination
+file. It logs the start and completion of the process, and exits the
+program if the insertion fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>database</strong> (<em>str</em>) – Name of the target PostgreSQL database.</p></li>
+<li><p><strong>destination_file</strong> (<em>str</em>) – Path to the JSON file containing destination</p></li>
+<li><p><strong>mappings.</strong> (<em>query</em>)</p></li>
+<li><p><strong>source_data</strong> (<em>str</em>) – Serialized source data payload to be inserted.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>SystemExit</strong> – If the data insertion fails via <cite>dest.insert_pg_tables</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.main">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.main" title="Link to this definition"></a></dt>
+<dd><p>Executes the full ETL pipeline for a specified PostgreSQL database and its
+optional test clone.</p>
+<p>This function coordinates teardown, query mapping generation, schema
+creation, data extraction, and data loading. It uses CLI arguments to
+determine the target database and whether to seed a test database with the
+same data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>argparse.Namespace</em>) – Parsed command-line arguments containing:
+- database (str): Name of the target PostgreSQL database.
+- seed_test_database (bool): Flag indicating whether to seed a
+test clone.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>SystemExit</strong> – If any critical step in the ETL pipeline fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="ETL Orchestrator for PostgreSQL documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

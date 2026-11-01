@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>build package &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">build package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/build.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-package">
+<h1>build package<a class="headerlink" href="#build-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-build.build_destination_database">
+<span id="build-build-destination-database-module"></span><h2>build.build_destination_database module<a class="headerlink" href="#module-build.build_destination_database" title="Link to this heading"></a></h2>
+<p>Module: postgres_schema_manager</p>
+<section id="purpose">
+<h3>Purpose:<a class="headerlink" href="#purpose" title="Link to this heading"></a></h3>
+<p>Provides utilities for managing PostgreSQL database objects including
+databases, roles, schemas, tables, and permissions.</p>
+</section>
+<section id="key-features">
+<h3>Key Features:<a class="headerlink" href="#key-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Executes SQL scripts for creating and dropping databases and roles</p></li>
+<li><p>Grants permissions on databases and tables</p></li>
+<li><p>Reads and executes table creation queries from JSON mappings</p></li>
+<li><p>Logs execution outcomes for traceability and debugging</p></li>
+</ul>
+</section>
+<section id="environment-variables-required">
+<h3>Environment Variables Required:<a class="headerlink" href="#environment-variables-required" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>SQL_PATH: Base path for SQL script storage</p></li>
+<li><p>DB_ROLE: Role name used in role-related operations</p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h3>Dependencies:<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>decouple: For environment variable management</p></li>
+<li><p>db.postgresql: PostgreSQL connection utilities</p></li>
+<li><p>db.postgresql_queries: Query execution helpers</p></li>
+<li><p>utils.file_handler: JSON and SQL file readers</p></li>
+<li><p>utils.logging_handler: Custom logger for error tracking</p></li>
+</ul>
+</section>
+<section id="example-usage">
+<h3>Example Usage:<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>success = create_pg_database(“analytics_db”)
+if success:</p>
+<blockquote>
+<div><p>grant_pg_database_permissions(“analytics_db”)</p>
+</div></blockquote>
+</div></blockquote>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.create_pg_database">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">create_pg_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/build/build_destination_database.html#create_pg_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.create_pg_database" title="Link to this definition"></a></dt>
+<dd><p>Creates a PostgreSQL database using a predefined SQL script.</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Name of the database to create.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if the database was created successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes:<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses db_database__CREATE.sql from the destination path.</p></li>
+<li><p>Logs execution status with script name.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.create_pg_database_schemas">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">create_pg_database_schemas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/build/build_destination_database.html#create_pg_database_schemas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.create_pg_database_schemas" title="Link to this definition"></a></dt>
+<dd><p>Creates schemas within a PostgreSQL database using a predefined SQL script.</p>
+<section id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Target database for schema creation.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns:<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if schemas were created successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Notes:<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses db_schemas__CREATE.sql from the destination path.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.create_pg_role">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">create_pg_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/build/build_destination_database.html#create_pg_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.create_pg_role" title="Link to this definition"></a></dt>
+<dd><p>Creates a PostgreSQL role using a predefined SQL script.</p>
+<section id="id4">
+<h3>Parameters:<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Target database for role creation.</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h3>Returns:<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if the role was created successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Notes:<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Skips execution if database name contains “_test”.</p></li>
+<li><p>Uses db_role__CREATE.sql from the destination path.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.create_pg_tables">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">create_pg_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/build/build_destination_database.html#create_pg_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.create_pg_tables" title="Link to this definition"></a></dt>
+<dd><p>Creates tables in a PostgreSQL database using queries defined in a JSON
+mapping file.</p>
+<section id="id7">
+<h3>Parameters:<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Target database for table creation.</p>
+</dd>
+<dt>file<span class="classifier">str</span></dt><dd><p>JSON file containing table creation mappings.</p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Returns:<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if all tables were created successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="exceptions">
+<h3>Exceptions:<a class="headerlink" href="#exceptions" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>FileNotFoundError:</dt><dd><p>Raised if any referenced SQL file is missing or empty.</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>Notes:<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Reads table creation scripts from DESTINATION_PATH.</p></li>
+<li><p>Uses db.set_pg_connection and q.pg_query for execution.</p></li>
+<li><p>Logs success or failure for each table script.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.drop_pg_database">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">drop_pg_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/build/build_destination_database.html#drop_pg_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.drop_pg_database" title="Link to this definition"></a></dt>
+<dd><p>Drops a PostgreSQL database using a predefined SQL script.</p>
+<section id="id10">
+<h3>Parameters:<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Name of the database to drop.</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h3>Returns:<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if the script executed successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h3>Notes:<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses db_database__DROP.sql from the destination path.</p></li>
+<li><p>Logs success or failure with script name.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.drop_pg_role">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">drop_pg_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/build/build_destination_database.html#drop_pg_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.drop_pg_role" title="Link to this definition"></a></dt>
+<dd><p>Drops a PostgreSQL role using a predefined SQL script.</p>
+<section id="id13">
+<h3>Parameters:<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Target database for role execution.</p>
+</dd>
+<dt>use_default<span class="classifier">bool</span></dt><dd><p>Whether to use the default database from environment config.</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Returns:<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if the role was dropped successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h3>Notes:<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses db_role__DROP.sql from the destination path.</p></li>
+<li><p>Logs failure with role name from environment if unsuccessful.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.grant_pg_database_permissions">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">grant_pg_database_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/build/build_destination_database.html#grant_pg_database_permissions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.grant_pg_database_permissions" title="Link to this definition"></a></dt>
+<dd><p>Grants permissions on a PostgreSQL database using a predefined SQL script.</p>
+<section id="id16">
+<h3>Parameters:<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Target database for permission grants.</p>
+</dd>
+</dl>
+</section>
+<section id="id17">
+<h3>Returns:<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if permissions were granted successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h3>Notes:<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses db_database__GRANT.sql from the destination path.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="build.build_destination_database.grant_pg_table_permissions">
+<span class="sig-prename descclassname"><span class="pre">build.build_destination_database.</span></span><span class="sig-name descname"><span class="pre">grant_pg_table_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/build/build_destination_database.html#grant_pg_table_permissions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#build.build_destination_database.grant_pg_table_permissions" title="Link to this definition"></a></dt>
+<dd><p>Grants permissions on tables and schemas in a PostgreSQL database.</p>
+<section id="id19">
+<h3>Parameters:<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>Target database for permission grants.</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h3>Returns:<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>bool</dt><dd><p>True if permissions were granted successfully, False otherwise.</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h3>Notes:<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Uses db_role__GRANT.sql from the destination path.</p></li>
+</ul>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-build">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-build" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

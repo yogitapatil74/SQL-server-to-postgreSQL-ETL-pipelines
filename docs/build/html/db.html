@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>db package &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">db package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/db.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="db-package">
+<h1>db package<a class="headerlink" href="#db-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-db.postgresql">
+<span id="db-postgresql-module"></span><h2>db.postgresql module<a class="headerlink" href="#module-db.postgresql" title="Link to this heading"></a></h2>
+<p>Module: postgresql</p>
+<p>This module provides utilities for establishing a PostgreSQL database
+connection using credentials and configuration values stored in environment
+variables.</p>
+<p>Key Features:
+- Dynamically selects between default and custom database names
+- Handles connection errors with contextual logging and user-friendly messages
+- Supports autocommit mode for transactional consistency</p>
+<p>Environment Variables Required:
+- SQL_PATH: Base path for SQL-related operations
+- POSTGRES_DB_NAME: Default database name
+- POSTGRESQL_HOSTNAME: Hostname of the PostgreSQL server
+- POSTGRESQL_PORT: Port number for the PostgreSQL server
+- POSTGRES_DB_USERNAME: Username for authentication
+- POSTGRES_DB_PASSWORD: Password for authentication</p>
+<p>Dependencies:
+- psycopg2: PostgreSQL adapter for Python
+- python-decouple: For secure environment variable management
+- utils.logging_handler: Custom logger for error tracking</p>
+<dl>
+<dt>Example Usage:</dt><dd><p>conn = set_pg_connection(“analytics_db”)
+if conn:</p>
+<blockquote>
+<div><p># Proceed with queries</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.postgresql.set_pg_connection">
+<span class="sig-prename descclassname"><span class="pre">db.postgresql.</span></span><span class="sig-name descname"><span class="pre">set_pg_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/db/postgresql.html#set_pg_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.postgresql.set_pg_connection" title="Link to this definition"></a></dt>
+<dd><p>Establishes a connection to a PostgreSQL database using psycopg2.</p>
+<section id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>database<span class="classifier">str</span></dt><dd><p>The name of the database to connect to. Ignored if <cite>use_default</cite> is
+True.</p>
+</dd>
+<dt>use_default<span class="classifier">bool, optional</span></dt><dd><p>If True, uses the default database name from environment
+config(<cite>POSTGRES_DB_NAME</cite>).
+If False, uses the provided <cite>database</cite> argument.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>psycopg2.extensions.connection or None</dt><dd><p>A PostgreSQL connection object if successful, otherwise None.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h3>Raises:<a class="headerlink" href="#raises" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>OperationalError</dt><dd><p>Catches and logs connection errors such as authentication failure or
+server unavailability.</p>
+</dd>
+</dl>
+</section>
+<section id="logging">
+<h3>Logging:<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Logs detailed error messages with traceback using the custom logger.</p></li>
+<li><p>Prints user-friendly hints for common connection issues.</p></li>
+</ul>
+</section>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">set_pg_connection</span><span class="p">(</span><span class="s2">&quot;sales_db&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># Use conn to execute queries</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-db.postgresql_queries">
+<span id="db-postgresql-queries-module"></span><h2>db.postgresql_queries module<a class="headerlink" href="#module-db.postgresql_queries" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.postgresql_queries.pg_query">
+<span class="sig-prename descclassname"><span class="pre">db.postgresql_queries.</span></span><span class="sig-name descname"><span class="pre">pg_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/db/postgresql_queries.html#pg_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.postgresql_queries.pg_query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="db.postgresql_queries.pg_query_from_file">
+<span class="sig-prename descclassname"><span class="pre">db.postgresql_queries.</span></span><span class="sig-name descname"><span class="pre">pg_query_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/db/postgresql_queries.html#pg_query_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.postgresql_queries.pg_query_from_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-db.sql_server">
+<span id="db-sql-server-module"></span><h2>db.sql_server module<a class="headerlink" href="#module-db.sql_server" title="Link to this heading"></a></h2>
+<section id="module-sql-server">
+<h3>Module: sql_server<a class="headerlink" href="#module-sql-server" title="Link to this heading"></a></h3>
+<section id="purpose">
+<h4>Purpose:<a class="headerlink" href="#purpose" title="Link to this heading"></a></h4>
+<p>Provides a utility function to execute SQL Server queries using pyodbc and
+environment-based connection strings.</p>
+</section>
+<section id="key-features">
+<h4>Key Features:<a class="headerlink" href="#key-features" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Dynamically establishes a SQL Server connection if none is provided</p></li>
+<li><p>Executes arbitrary SQL queries and returns results as a list of lists</p></li>
+<li><p>Handles database errors with rollback and structured logging</p></li>
+<li><p>Ensures connection closure and transactional integrity</p></li>
+</ul>
+</section>
+<section id="environment-variables-required">
+<h4>Environment Variables Required:<a class="headerlink" href="#environment-variables-required" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>SQLSERVER_CONN : ODBC connection string for SQL Server</p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h4>Dependencies:<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>pyodbc : Python ODBC interface for SQL Server</p></li>
+<li><p>python-decouple : For secure environment variable management</p></li>
+<li><p>utils.logging_handler : Custom logger for error tracking</p></li>
+</ul>
+</section>
+<section id="example-usage">
+<h4>Example Usage:<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>success, results = execute_sql_query(None, “SELECT * FROM employees”)
+if success:</p>
+<blockquote>
+<div><p># Process results</p>
+</div></blockquote>
+</div></blockquote>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.sql_server.execute_sql_query">
+<span class="sig-prename descclassname"><span class="pre">db.sql_server.</span></span><span class="sig-name descname"><span class="pre">execute_sql_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/db/sql_server.html#execute_sql_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#db.sql_server.execute_sql_query" title="Link to this definition"></a></dt>
+<dd><p>Executes a SQL query against a SQL Server database using pyodbc.</p>
+<section id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>conn<span class="classifier">pyodbc.Connection or None</span></dt><dd><p>An existing database connection. If None, a new connection is created
+using the environment variable <cite>SQLSERVER_CONN</cite>.</p>
+</dd>
+<dt>query<span class="classifier">str, optional</span></dt><dd><p>The SQL query string to execute. Defaults to None.</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h3>Returns:<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Tuple[bool, list]</dt><dd><p>A tuple containing:
+- success (bool): True if query execution returned rows, False
+otherwise
+- data (list): List of rows returned from the query, each row as a
+list of column values</p>
+</dd>
+</dl>
+</section>
+<section id="exceptions">
+<h3>Exceptions:<a class="headerlink" href="#exceptions" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>DatabaseError:</dt><dd><p>Raised for SQL Server-specific errors. Rolls back transaction and logs
+the error.</p>
+</dd>
+</dl>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Raised for general pyodbc errors. Rolls back transaction and logs the
+error.</p>
+</div>
+</section>
+<section id="id3">
+<h3>Logging:<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Logs query-level errors with traceback using the custom logger</p></li>
+<li><p>Includes query string in error logs for debugging</p></li>
+</ul>
+</section>
+<section id="notes">
+<h3>Notes:<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Commits transaction after successful query execution</p></li>
+<li><p>Closes cursor and connection in all cases (success, error, or exception)</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Example:<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">success</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">execute_sql_query</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;SELECT TOP 10 * FROM orders&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-db">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-db" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
