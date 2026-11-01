@@ -1,0 +1,27 @@
+# Local PostgreSQL destination for development and the integration test.
+#
+#   docker compose up -d
+#   cp .env.example .env   # POSTGRESQL_PORT=5432, POSTGRES_DB_PASSWORD=postgres
+#
+# SQL Server (the source) is not included: point SQLSERVER_CONN at an
+# instance with the AdventureWorks sample database restored.
+services:
+  postgres:
+    image: postgres:16
+    container_name: etl-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB_NAME:-postgres}
+    ports:
+      - "${POSTGRESQL_PORT:-5432}:5432"
+    volumes:
+      - etl-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  etl-pgdata:

@@ -1,0 +1,22 @@
+# Python
+*.py[cod]
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# PDM
+.pdm-python
+.pdm-build/
+
+# Secrets / local config
+.env
+.pylintrc
+.vscode/
+
+# Runtime logs (logs/app.log is kept as a committed example)
+/logs/*.log
+!/logs/app.log
+

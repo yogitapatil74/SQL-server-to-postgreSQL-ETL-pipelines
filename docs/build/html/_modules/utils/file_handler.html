@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils.file_handler &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">main module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">utils.file_handler</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for utils.file_handler</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module: json_query_handler</span>
+<span class="sd">==========================</span>
+
+<span class="sd">This module provides utilities for reading JSON files and extracting query data</span>
+<span class="sd">used in ETL pipelines or data orchestration workflows. It includes structured</span>
+<span class="sd">logging, validation, and error handling to support robust backend operations.</span>
+
+<span class="sd">Dependencies</span>
+<span class="sd">------------</span>
+<span class="sd">- json : For loading JSON content from disk.</span>
+<span class="sd">- typing : For type annotations.</span>
+<span class="sd">- utils.logging_handler.logger : Custom logger for structured logging.</span>
+<span class="sd">- utils.validation_handler : Validation utilities for list integrity checks.</span>
+
+<span class="sd">Functions</span>
+<span class="sd">---------</span>
+<span class="sd">- read_json_file : Loads and validates a JSON file containing query</span>
+<span class="sd">definitions.</span>
+<span class="sd">- load_json_file : Reads raw JSON content from disk and returns a success flag.</span>
+<span class="sd">- read_query_from_file : Reads a raw SQL query from a text file.</span>
+<span class="sd">- get_query_list_from_file : Extracts a list of query tuples from JSON content.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.logging_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span> <span class="k">as</span> <span class="n">log</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">utils.validation_handler</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">vh</span>
+
+
+<div class="viewcode-block" id="read_json_file">
+<a class="viewcode-back" href="../../utils.html#utils.file_handler.read_json_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_json_file</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load and validate a JSON file containing query definitions.</span>
+
+<span class="sd">    This function reads a JSON file, validates its contents using a list</span>
+<span class="sd">    integrity check, and returns a success flag along with the parsed data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        A descriptive label used in logging to identify the source of the JSON</span>
+<span class="sd">        file.</span>
+<span class="sd">    file : str</span>
+<span class="sd">        Path to the JSON file to be read.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[bool, list]</span>
+<span class="sd">        A tuple containing:</span>
+<span class="sd">        - success (bool): True if the file was read and validated successfully.</span>
+<span class="sd">        - queries (list): Parsed list of query definitions.</span>
+
+<span class="sd">    Logging</span>
+<span class="sd">    -------</span>
+<span class="sd">    Logs success or failure messages based on file read and validation outcome.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; read_json_file(&quot;source&quot;, &quot;source_queries.json&quot;)</span>
+<span class="sd">    (True, [...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># instantiate queries string variable</span>
+    <span class="n">queries</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># load json data from file into queries variable</span>
+        <span class="n">success</span><span class="p">,</span> <span class="n">queries</span> <span class="o">=</span> <span class="n">load_json_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+        <span class="c1"># test if queries variable is empty</span>
+        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🟢 SUCCESS: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> JSON file read.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔴 FAILED:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> JSON file was not read.&quot;</span><span class="p">)</span>
+
+        <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="c1"># test if queries list is not empty</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="n">vh</span><span class="o">.</span><span class="n">validate_list</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> JSON File&quot;</span><span class="p">,</span> <span class="n">queries</span><span class="p">)</span>
+
+        <span class="c1"># return success boolean and queries variable</span>
+        <span class="k">return</span> <span class="n">success</span><span class="p">,</span> <span class="n">queries</span>
+
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_json_file">
+<a class="viewcode-back" href="../../utils.html#utils.file_handler.load_json_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_json_file</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load raw JSON content from a file.</span>
+
+<span class="sd">    This function opens a JSON file, parses its contents, and returns a</span>
+<span class="sd">    success flag along with the loaded data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file : str</span>
+<span class="sd">        Path to the JSON file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[bool, list]</span>
+<span class="sd">        A tuple containing:</span>
+<span class="sd">        - success (bool): True if the file was loaded successfully.</span>
+<span class="sd">        - data (list): Parsed JSON content.</span>
+
+<span class="sd">    Logging</span>
+<span class="sd">    -------</span>
+<span class="sd">    Logs errors for file not found, JSON decode issues, or unexpected</span>
+<span class="sd">    exceptions.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; load_json_file(&quot;queries.json&quot;)</span>
+<span class="sd">    (True, [...])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># instantiate data list variable</span>
+    <span class="n">data</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># open json file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="c1"># append loaded json file to data list variable</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="c1"># return data list variable with json data</span>
+            <span class="k">return</span> <span class="n">success</span><span class="p">,</span> <span class="n">data</span>
+
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="read_query_from_file">
+<a class="viewcode-back" href="../../utils.html#utils.file_handler.read_query_from_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_query_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read a raw SQL query from a text file.</span>
+
+<span class="sd">    This function opens a file containing a SQL query, strips newline and tab</span>
+<span class="sd">    characters, and returns the cleaned query string.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : str</span>
+<span class="sd">        Path to the query file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[bool, str]</span>
+<span class="sd">        A tuple containing:</span>
+<span class="sd">        - success (bool): True if the query was read successfully.</span>
+<span class="sd">        - query (str): Cleaned SQL query string.</span>
+
+<span class="sd">    Logging</span>
+<span class="sd">    -------</span>
+<span class="sd">    Logs errors for file not found or unexpected exceptions.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; read_query_from_file(&quot;create_table.sql&quot;)</span>
+<span class="sd">    (True, &quot;CREATE TABLE ...&quot;) </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># instantiate query list variable</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># open query file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">query</span><span class="p">:</span>
+            <span class="c1"># read query file</span>
+            <span class="c1"># load into query variable</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">query</span><span class="p">:</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># return success bool and query list variable</span>
+        <span class="k">return</span> <span class="n">success</span><span class="p">,</span> <span class="n">query</span>
+
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_query_list_from_file">
+<a class="viewcode-back" href="../../utils.html#utils.file_handler.get_query_list_from_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_query_list_from_file</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queries</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract a list of query tuples from JSON content.</span>
+
+<span class="sd">    This function iterates over a list of query dictionaries and constructs a</span>
+<span class="sd">    list of (table_id, query_string) tuples for downstream execution or</span>
+<span class="sd">    mapping.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The key name used to extract query strings from each dictionary.</span>
+<span class="sd">    queries : str</span>
+<span class="sd">        A list of dictionaries containing query metadata.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple[bool, list]</span>
+<span class="sd">        A tuple containing:</span>
+<span class="sd">        - success (bool): True if the query list was constructed successfully.</span>
+<span class="sd">        - query_list (list): List of (table_id, query_string) tuples.</span>
+
+<span class="sd">    Logging</span>
+<span class="sd">    -------</span>
+<span class="sd">    Logs success for each query added and failure if the list is empty.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; get_query_list_from_file(&quot;destination_query_create&quot;, queries)</span>
+<span class="sd">    (True, [(1, &quot;CREATE TABLE ...&quot;), (2, &quot;CREATE TABLE ...&quot;)])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># instantiate query_list list variable</span>
+    <span class="n">query_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+            <span class="c1"># append create query to query_list variable</span>
+            <span class="n">query_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">query</span><span class="p">[</span><span class="s2">&quot;table_id&quot;</span><span class="p">]),</span> <span class="n">query</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]))</span>
+
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🟢 SUCCESS: </span><span class="si">{</span><span class="n">query</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> added to query list.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># test if query_list is not empty</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="n">vh</span><span class="o">.</span><span class="n">validate_list</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">query_list</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔴 FAILED: </span><span class="si">{</span><span class="n">query</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> not added to query </span><span class="se">\</span>
+<span class="s2">                        list.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># return success boolean and query_list variable</span>
+        <span class="k">return</span> <span class="n">success</span><span class="p">,</span> <span class="n">query_list</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

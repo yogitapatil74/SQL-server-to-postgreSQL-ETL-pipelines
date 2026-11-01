@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>load.insert_source_data &mdash; ETL Orchestrator for PostgreSQL 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ETL Orchestrator for PostgreSQL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../main.html">main module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ETL Orchestrator for PostgreSQL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">load.insert_source_data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for load.insert_source_data</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module: insert_source_data</span>
+<span class="sd">==========================</span>
+
+<span class="sd">This module handles the insertion of structured data into PostgreSQL tables</span>
+<span class="sd">using parameterized SQL queries defined in a JSON mapping file. It reads query</span>
+<span class="sd">templates, binds data values, and executes inserts against a target database.</span>
+
+<span class="sd">Dependencies:</span>
+<span class="sd">-------------</span>
+<span class="sd">- db.postgresql: Manages PostgreSQL connection setup.</span>
+<span class="sd">- db.postgresql_queries: Executes parameterized SQL insert operations.</span>
+<span class="sd">- utils.file_handler: Loads JSON mappings and reads SQL query files.</span>
+<span class="sd">- utils.logging_handler: Provides structured logging for success and error</span>
+<span class="sd">tracking.</span>
+<span class="sd">- decouple.config: Loads environment-specific configuration values.</span>
+
+<span class="sd">Environment Variables:</span>
+<span class="sd">----------------------</span>
+<span class="sd">- SQL_PATH: Base path to the directory containing SQL destination query files.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">------</span>
+<span class="sd">This module is typically used in ETL workflows or data migration pipelines</span>
+<span class="sd">where data must be inserted into PostgreSQL tables based on external query</span>
+<span class="sd">templates.</span>
+
+<span class="sd">Example:</span>
+<span class="sd">--------</span>
+<span class="sd">    success = insert_pg_tables(</span>
+<span class="sd">        database=&quot;analytics_db&quot;,</span>
+<span class="sd">        file=&quot;mapping_destination.json&quot;,</span>
+<span class="sd">        data=transformed_data</span>
+<span class="sd">    )</span>
+<span class="sd">    if success:</span>
+<span class="sd">        log.info(&quot;All destination inserts completed successfully.&quot;)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">decouple</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">db.postgresql</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pgdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">db.postgresql_queries</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">q</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">utils.file_handler</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.logging_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span> <span class="k">as</span> <span class="n">log</span>
+
+
+<span class="n">DESTINATION_PATH</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;SQL_PATH&quot;</span><span class="p">)</span><span class="si">}</span><span class="se">\\</span><span class="s2">destination&quot;</span>
+
+
+<div class="viewcode-block" id="insert_pg_tables">
+<a class="viewcode-back" href="../../load.html#load.insert_source_data.insert_pg_tables">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">insert_pg_tables</span><span class="p">(</span><span class="n">database</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inserts data into PostgreSQL tables using SQL queries defined in a JSON</span>
+<span class="sd">    mapping file.</span>
+
+<span class="sd">    This function reads a destination mapping file that specifies table IDs</span>
+<span class="sd">    and associated SQL insert query filenames. It loads each query, binds the</span>
+<span class="sd">    corresponding data values, and executes the insert operation using a</span>
+<span class="sd">    PostgreSQL connection.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    database : str</span>
+<span class="sd">        The name of the target PostgreSQL database.</span>
+
+<span class="sd">    file : str</span>
+<span class="sd">        The filename of the JSON mapping file (&#39;mapping_destination.json&#39;) </span>
+<span class="sd">        that defines the insert query files and table IDs.</span>
+
+<span class="sd">    data : list</span>
+<span class="sd">        A list of data payloads to be inserted. Each item corresponds to a</span>
+<span class="sd">        table ID defined in the mapping file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    bool</span>
+<span class="sd">        True if all insert operations succeed; False if any query fails or an</span>
+<span class="sd">        exception occurs.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">    -------</span>
+<span class="sd">    FileNotFoundError:</span>
+<span class="sd">        If any referenced SQL query file is missing or unreadable.</span>
+
+<span class="sd">    Exception:</span>
+<span class="sd">        For any unexpected errors during query execution or connection setup.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    ------</span>
+<span class="sd">    - Query files must be located in the directory defined by the SQL_PATH</span>
+<span class="sd">    environment variable.</span>
+<span class="sd">    - Each query file must contain a valid parameterized SQL INSERT statement.</span>
+<span class="sd">    - Logging is performed for each query execution to aid in debugging and</span>
+<span class="sd">    traceability.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># instantiate success boolean variable to be returned</span>
+    <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># read mapping_destination.json file</span>
+        <span class="n">success</span><span class="p">,</span> <span class="n">queries</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">load_json_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">queries</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;table_id&#39;</span><span class="p">]))</span>
+
+        <span class="c1"># test if queries is not empty</span>
+        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+
+            <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+                <span class="c1"># construct full path to destination query file</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;destination_query_insert&#39;</span><span class="p">]</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">DESTINATION_PATH</span><span class="si">}</span><span class="se">\\</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+                <span class="n">data_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;table_id&#39;</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data_index</span><span class="p">]</span>
+
+                <span class="c1"># read query from file</span>
+                <span class="n">success</span><span class="p">,</span> <span class="n">query</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read_query_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+                <span class="c1"># set connection to postgresql database</span>
+                <span class="n">conn</span> <span class="o">=</span> <span class="n">pgdb</span><span class="o">.</span><span class="n">set_pg_connection</span><span class="p">(</span><span class="n">database</span><span class="p">)</span>
+
+                <span class="c1"># execute insert query</span>
+                <span class="n">q</span><span class="o">.</span><span class="n">pg_query</span><span class="p">(</span>
+                    <span class="n">conn</span><span class="p">,</span>
+                    <span class="n">database</span><span class="o">=</span><span class="n">database</span><span class="p">,</span>
+                    <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+                    <span class="n">values</span><span class="o">=</span><span class="n">values</span>
+                <span class="p">)</span>
+
+                <span class="c1"># set success variable</span>
+                <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🟢 SUCCESS: </span><span class="si">{</span><span class="n">path</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span><span class="si">}</span><span class="s2"> executed.&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔴 FAILED: </span><span class="si">{</span><span class="n">path</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span><span class="si">}</span><span class="s2"> not executed.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># return success boolean</span>
+        <span class="k">return</span> <span class="n">success</span>
+
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Kimberly Emerson.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
