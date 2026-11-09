@@ -223,11 +223,6 @@ This project welcomes modular enhancements, teardown logic improvements, and onb
 - Updated docstrings and logging
 - Contributor-friendly scaffolds
 
-## 🙏 Credits
-
-Originally created by [Kimberly Emerson](https://github.com/kimberly-emerson/python-etl-sql-postgres).
-This repository contains bug fixes and enhancements on top of that work — see
-[CHANGELOG.md](./CHANGELOG.md).
 
 ## 📄 License
 
